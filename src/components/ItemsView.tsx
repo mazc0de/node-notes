@@ -91,7 +91,7 @@ export function ItemsView({
           <select
             value={sort}
             onChange={(e) => setParam('sort', e.target.value === 'title' ? 'title' : null)}
-            className="rounded-lg border border-line bg-transparent py-1 pr-1 pl-2 text-sm text-ink"
+            className="select rounded-lg border border-line bg-transparent py-1 pl-2.5 text-sm text-ink"
           >
             <option value="recent">Newest first</option>
             <option value="title">Title A–Z</option>

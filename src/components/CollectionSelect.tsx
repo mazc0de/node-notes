@@ -18,7 +18,7 @@ export function CollectionSelect({
       id={id}
       value={value ?? ''}
       onChange={(e) => onChange(e.target.value || null)}
-      className={cx(inputClass, 'appearance-auto', className)}
+      className={cx(inputClass, 'select', className)}
     >
       <option value="">No collection</option>
       {collections.map((c) => (
