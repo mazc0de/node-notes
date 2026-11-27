@@ -6,12 +6,11 @@ import { StrictMode, Suspense, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router'
 import { registerSW } from 'virtual:pwa-register'
-import { AuthProvider } from './auth/AuthProvider'
-import { RequireAuth } from './auth/RequireAuth'
+import { AccessProvider } from './auth/AccessProvider'
+import { RequireAccess } from './auth/RequireAccess'
 import { AppLayout } from './components/AppLayout'
 import { ToastProvider } from './components/Toast'
 import './index.css'
-import { AuthCallback } from './pages/AuthCallback'
 import { Landing } from './pages/Landing'
 import { BookmarksPage, CollectionPage, NotFoundPage, NotesPage, TagPage } from './pages/ListPages'
 import { SettingsPage } from './pages/SettingsPage'
@@ -24,12 +23,11 @@ const NotePage = lazy(() => import('./pages/NotePage'))
 
 const router = createBrowserRouter([
   { path: '/', element: <Landing /> },
-  { path: '/auth/callback', element: <AuthCallback /> },
   {
     element: (
-      <RequireAuth>
+      <RequireAccess>
         <AppLayout />
-      </RequireAuth>
+      </RequireAccess>
     ),
     children: [
       { path: '/bookmarks', element: <BookmarksPage /> },
@@ -61,11 +59,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
+        <AccessProvider>
           <ToastProvider>
             <RouterProvider router={router} />
           </ToastProvider>
-        </AuthProvider>
+        </AccessProvider>
       </QueryClientProvider>
     </ThemeProvider>
   </StrictMode>,

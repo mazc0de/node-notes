@@ -183,9 +183,3 @@ export async function fetchTags(): Promise<Tag[]> {
 export async function deleteTag(id: string): Promise<void> {
   unwrap(await supabase.from('tags').delete().eq('id', id))
 }
-
-// ─── Account ────────────────────────────────────────────────────────────────
-
-export async function deleteMyAccount(): Promise<void> {
-  unwrap(await supabase.rpc('delete_my_account'))
-}
