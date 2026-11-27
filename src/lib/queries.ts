@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { useToast } from '../components/Toast'
-import { useAuth } from '../auth/AuthProvider'
+import { useAccess } from '../auth/AccessProvider'
 import { deleteItem, fetchCollections, fetchItems, fetchTags, restoreItem, setPinned } from './api'
 import { itemTitle, truncate } from './display'
 import type { ItemSummary } from './types'
@@ -15,18 +15,18 @@ export const keys = {
 }
 
 export function useItems() {
-  const { session } = useAuth()
-  return useQuery({ queryKey: keys.items, queryFn: fetchItems, enabled: Boolean(session) })
+  const { unlocked } = useAccess()
+  return useQuery({ queryKey: keys.items, queryFn: fetchItems, enabled: unlocked })
 }
 
 export function useCollections() {
-  const { session } = useAuth()
-  return useQuery({ queryKey: keys.collections, queryFn: fetchCollections, enabled: Boolean(session) })
+  const { unlocked } = useAccess()
+  return useQuery({ queryKey: keys.collections, queryFn: fetchCollections, enabled: unlocked })
 }
 
 export function useTags() {
-  const { session } = useAuth()
-  return useQuery({ queryKey: keys.tags, queryFn: fetchTags, enabled: Boolean(session) })
+  const { unlocked } = useAccess()
+  return useQuery({ queryKey: keys.tags, queryFn: fetchTags, enabled: unlocked })
 }
 
 export function useRefreshLibrary() {

@@ -1,7 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useMemo, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router'
-import { displayName, useAuth } from '../auth/AuthProvider'
 import { createCollection } from '../lib/api'
 import { keys, useCollections, useItems, useTags } from '../lib/queries'
 import { BookmarkIcon, CollectionIcon, HashIcon, NoteIcon, PlusIcon, SearchIcon, SettingsIcon } from './icons'
@@ -20,7 +19,6 @@ function Count({ n }: { n: number | undefined }) {
 }
 
 export function Sidebar({ onSearch }: { onSearch: () => void }) {
-  const { user } = useAuth()
   const { data: items = [] } = useItems()
   const { data: collections = [] } = useCollections()
   const { data: tags = [] } = useTags()
@@ -109,7 +107,6 @@ export function Sidebar({ onSearch }: { onSearch: () => void }) {
         <NavLink to="/settings" className={linkClass}>
           <SettingsIcon size={17} />
           <span className="min-w-0 flex-1 truncate">Settings</span>
-          <span className="max-w-28 truncate text-xs text-muted">{displayName(user)}</span>
         </NavLink>
       </div>
     </nav>
